@@ -78,6 +78,23 @@ async function run() {
    )
    res.send(result)
    })
+
+
+//    logout
+
+  app.get('/logout', async(req,res)=>{
+    try{
+      res.clearCookie('token',{
+        maxAge: 0,
+        secure: process.env.NODE_ENV=== "production",
+        sameSite: process.env.NODE.ENV === 'production' ? 'none' : 'strict'
+      })
+        .send({success: true})
+        console.log("logout successfull");
+    }catch{
+      res.status(500).send(err)
+    }
+  })
    
 
 
